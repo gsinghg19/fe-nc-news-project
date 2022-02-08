@@ -1,0 +1,276 @@
+const Homepage = () => {
+  return (
+    <div>
+      <h1>Welcome to my NC news App</h1>
+      <img
+        id="Home"
+        src="https://media.istockphoto.com/vectors/latest-news-vector-id1329330958"
+        alt="News logo"
+        height="130"
+        width="130"
+      />
+    </div>
+  );
+};
+
+export default Homepage;
+
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+
+const Header = () => {
+  return (
+    <div>
+      <h1>NC news app</h1>
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          required
+          id="outlined-required"
+          label="Required"
+          defaultValue="Hello World"
+        />
+      </Box>
+    </div>
+  );
+};
+
+export default Header;
+
+
+
+
+
+
+
+import { Link } from "react-router-dom";
+import Card from '@mui/material/Card';
+
+const ArticleCard = ({ article_id, title, created_at, author }) => {
+  return (
+    <article className="ArticleCard">
+      <div className="ArticleInfo">
+        <h2 id="ArticleAuthor">
+          Posted by {author} on {created_at.slice(0, 10)}
+        </h2>
+        <Link className="ArticleTitle" to={`/articles/${article_id}`}>
+          <h2>{title}</h2>
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+export default ArticleCard;
+
+
+
+const ArticleList = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    getAllArticles()
+      .then((articlesFromApi) => {
+        setArticles(articlesFromApi);
+      })
+      .catch((error) => {
+        console.log(error, "running line 14<<<>>>");
+      });
+  }, []);
+
+  return (
+    <div className="articles">
+      <h3>ArticleList</h3>
+      <ul>
+        {articles.map((article) => {
+          return (
+            <li key={article.article_id}>
+              <Link to={`/articles/${article.article_id}`}>
+                <h2>(articles.article_name)</h2>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+
+import { Link } from "react-router-dom";
+
+const TopicCard = ({ slug, description }) => {
+  return (
+    <article className="TopicCard">
+      <Link className="Link" to={`/articles/topic/${slug}`}>
+        <h2>{slug.toUppercase()}</h2>
+      </Link>
+      <p>{description}</p>
+    </article>
+  );
+};
+
+ return (
+    <div className="TopicList">
+      {topic.map((topic) => {
+        return <TopicCard key={topic.slug} {...topic} />;
+      })}
+    </div>
+  );
+};
+
+export default TopicCard;
+
+
+
+
+import { useEffect, useState } from "react";
+import { getAllArticles } from "../utils/api";
+import { Button } from "@mui/material";
+
+const ArticleList = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    getAllArticles()
+      .then((articlesFromApi) => {
+        setArticles(articlesFromApi);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(articles);
+
+  return (
+    <div>
+      <h5>ArticleList</h5>
+      <ul>
+        <li>
+          <Button variant="contained" href={`/articles/${articles}`}>
+            <h5>Article title goes here</h5>
+          </Button>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default ArticleList;
+
+
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import React from "react-router-dom";
+
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+  ></Box>
+);
+
+function ArticleCard() {
+  return (
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Article
+        </Typography>
+        <Typography variant="h5" component="div">
+          Article Title
+        </Typography>
+        <Typography variant="body2">
+          Article Text first few lines
+          <br />
+          {'"NEWS, NEWS, NEWS, NEWS"'}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="large">Expand</Button>
+      </CardActions>
+    </Card>
+  );
+}
+
+export default ArticleCard;
+
+
+
+import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import React from "react-router-dom";
+
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+  ></Box>
+);
+
+const ArticleCard = ({ article_id, title, author }) => {
+  return (
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+          <article className="'ArticleCard">
+            <div className="ArticleInfo">
+              <h2 id="ArticleAuthor">Written by {author}</h2>
+              <Link className="ArticleTitle" to={`/articles/${article_id}`}>
+                <h2>{title}</h2>
+              </Link>
+            </div>
+          </article>
+          <br />
+          {'"NEWS, NEWS, NEWS, NEWS"'}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="large">Expand</Button>
+      </CardActions>
+    </Card>
+  );
+};
+
+export default ArticleCard;
+
+
+import { Link } from "react-router-dom";
+
+import React from "react-router-dom";
+
+const ArticleCard = ({ article_id, author, title, created_at }) => {
+  return (
+    <article className="'ArticleCard">
+      <div className="ArticleInfo">
+        <h2 id="ArticleAuthor">
+          Written by {author} on {created_at}
+        </h2>
+        <Link className="ArticleTitle" to={`/articles/${article_id}`}>
+          <h2>{title}</h2>
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+export default ArticleCard;
+
+
+
+
