@@ -66,6 +66,7 @@ const Counter = () => {
     <div>
       <p>Number of votes: {count}</p>
       <Button
+        disabled={count === 1}
         style={{ color: "green" }}
         variant="outlined"
         onClick={increaseCount}
@@ -73,13 +74,13 @@ const Counter = () => {
         increase 👍
       </Button>
       <Button
+        disabled={count === -1}
         style={{ color: "red" }}
         variant="outlined"
         onClick={decreaseCount}
       >
         decrease 👎
       </Button>
-
       <Button onClick={resetCounter} variant="outlined">
         Reset
         <PriorityHighIcon />
