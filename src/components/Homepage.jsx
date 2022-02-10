@@ -13,23 +13,29 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleUser } from "../utils/api";
 import UserCard from "./UserCard";
+import { CommentsDisabled, CommentSharp } from "@mui/icons-material";
 
-function Homepage() {
+const Homepage = () => {
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { username } = useParams();
-  console.log(username);
+  const [sortBy, setSortBy] = useState();
+  // const { username } = useParams();
+  console.log("line 21");
 
-  console.log(setUser);
+  console.log("line23", setUser);
 
   useEffect(() => {
     setIsLoading(true);
-    getSingleUser(username).then((userData) => {
-      console.log(userData);
-      setUser(userData);
-      setIsLoading(false);
-    });
-  }, [username]);
+    getSingleUser(sortBy)
+      .then((userData) => {
+        console.log("line 29", userData, user.username);
+        setUser(userData);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [sortBy]);
 
   return (
     <>
@@ -53,87 +59,35 @@ function Homepage() {
           </CardContent>
         </Card>
 
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
+        {/* -- individual UserCard which shows user info name, image-- */}
+
+        <ul>
+          <Card sx={{ minWidth: 375 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 18 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                {user.map((userObj) => {
+                  return <UserCard name={userObj.name}></UserCard>;
+                })}
+
+                {/* <article className="SingleUser">
                 <h4>Author username and picture/avatar {user.username}</h4>
 
                 <img src={user.avatar_url} alt="user avatar"></img>
               </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
-
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author name and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
-
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author name and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
-
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author name and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
+              <br /> */}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="large">Expand</Button>
+            </CardActions>
+          </Card>
+        </ul>
       </Stack>
     </>
   );
-}
+};
 export default Homepage;

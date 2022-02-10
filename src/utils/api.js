@@ -101,17 +101,6 @@ exports.getArticlesViaSingleTopic = (slug) => {
     });
 };
 
-exports.fetchArticleCommentsByArticleId = (article_id) => {
-  return axios
-    .get(
-      `https://nc-news-gsinghg19.herokuapp.com/api/articles/${article_id}/comments`
-    )
-    .then((res) => {
-      console.log(res.data.commentsByArticleId);
-      return res.data.commentsByArticleId;
-    });
-};
-
 exports.postNewComment = (article_id, comment) => {
   return axios
     .post(
@@ -141,10 +130,22 @@ exports.patchVotes = (path, id, vote) => {
     });
 };
 
+exports.fetchArticleCommentsByArticleId = (article_id) => {
+  return axios
+    .get(
+      `https://nc-news-gsinghg19.herokuapp.com/api/articles/${article_id}/comments`
+    )
+    .then((res) => {
+      console.log(res.data.commentsByArticleId);
+      return res.data.commentsByArticleId;
+    });
+};
+
 exports.getSingleUser = (username) => {
   return axios
     .get(`https://nc-news-gsinghg19.herokuapp.com/api/users/${username}`)
-    .then(({ data: { username } }) => {
-      return username;
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
     });
 };
