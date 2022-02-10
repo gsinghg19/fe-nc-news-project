@@ -1,19 +1,11 @@
-import { Card } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
-
-const UserCard = ({ user: { username, avatar_url, name } }) => {
+const UserCard = (props) => {
   return (
-    <Card sx={{ minWidth: 375 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-          <article className="UserCard">
-            <img src={avatar_url} alt={`${username}'s avatar/pic`} />
-          </article>
-          <br />
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className="UserCard">
+      <div className="UserInfo">
+        <strong>{props.author}</strong>
+        <p>{props.username}</p>
+      </div>
+    </div>
   );
 };
 
