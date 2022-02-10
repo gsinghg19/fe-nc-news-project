@@ -145,7 +145,7 @@ exports.getSingleUser = (username) => {
   return axios
     .get(`https://nc-news-gsinghg19.herokuapp.com/api/users/${username}`)
     .then((res) => {
-      console.log(res.data);
+      console.log(res.data.username);
       return res.data;
     });
 };

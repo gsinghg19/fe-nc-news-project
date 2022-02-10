@@ -23,8 +23,6 @@ const CommentList = (props) => {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log("line25");
-    console.log(props.id);
     fetchArticleCommentsByArticleId(props.id)
       .then((articleData) => {
         //console.log(articleData);
