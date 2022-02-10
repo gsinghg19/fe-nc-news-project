@@ -10,14 +10,13 @@ import Typography from "@mui/material/Typography";
 import React from "react-router-dom";
 import CommentList from "./CommentsList";
 import VotingCard from "./VotingCard";
-import Counter from "./Counter";
 import * as dayjs from "dayjs";
 import { CenterFocusStrong } from "@mui/icons-material";
-import AddComment from "./AddComment";
 
 const SingleArticle = () => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  //const [articleId, setArticleId] = useState("");
 
   const { article_id } = useParams();
 
@@ -33,7 +32,7 @@ const SingleArticle = () => {
     getSingleArticle(article_id)
       .then((articleData) => {
         setArticle(articleData);
-        console.log(articleData);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -64,7 +63,7 @@ const SingleArticle = () => {
           <Button size="large">share</Button>
         </CardActions>
       </Card>
-      <CommentList />
+      {<CommentList id={article_id} />}
     </>
   );
 };

@@ -6,9 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React from "react-router-dom";
 import CommentCard from "./CommentCard";
+import AddCommentBox from "./AddCommentBox";
+import * as dayjs from "dayjs";
 
-const CommentList = ({ article_id }) => {
+const CommentList = (props) => {
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortBy] = useState();
 
   const bull = (
     <Box
@@ -18,18 +22,25 @@ const CommentList = ({ article_id }) => {
   );
 
   useEffect(() => {
-    fetchArticleCommentsByArticleId(article_id)
+    setIsLoading(true);
+    console.log("line25");
+    console.log(props.id);
+    fetchArticleCommentsByArticleId(props.id)
       .then((articleData) => {
-        console.log(articleData);
+        //console.log(articleData);
         setComments(articleData);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [article_id]);
+  }, []);
 
-  return (
+  return isLoading ? (
+    <h1>Loading....</h1>
+  ) : (
     <ul>
+      <AddCommentBox />
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <CommentCard>
@@ -49,13 +60,13 @@ const CommentList = ({ article_id }) => {
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-            {comments.map((comment) => {
+            {comments.map((commentObj) => {
               return (
                 <CommentCard
-                  key={comment.comment_id}
-                  comment={comment}
-                  setComments={setComments}
-                />
+                  author={commentObj.author}
+                  created_at={dayjs(commentObj.created_at).format("DD/MM/YYYY")}
+                  body={commentObj.body}
+                ></CommentCard>
               );
             })}
           </Typography>

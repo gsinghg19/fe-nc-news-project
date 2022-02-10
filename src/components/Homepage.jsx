@@ -13,26 +13,42 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleUser } from "../utils/api";
 import UserCard from "./UserCard";
+import { CommentsDisabled, CommentSharp } from "@mui/icons-material";
 
-function Homepage() {
-  const [user, setUser] = useState([]);
+const Homepage = () => {
+  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { username } = useParams();
-  console.log(username);
+  const [sortBy, setSortBy] = useState();
+  // const { username } = useParams();
+  console.log("line 23");
 
-  console.log(setUser);
+  console.log("line25", users);
 
   useEffect(() => {
     setIsLoading(true);
-    getSingleUser(username).then((userData) => {
-      console.log(userData);
-      setUser(userData);
-      setIsLoading(false);
-    });
-  }, [username]);
+    getSingleUser(sortBy)
+      .then((userData) => {
+        setUsers(userData);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [sortBy]);
+
+  useState(() => {
+    getSingleUser()
+      .then((userCriteriaFromApi) => {
+        setSortBy(userCriteriaFromApi);
+      })
+      .catch((error) => {
+        console.log(error);
+      }, []);
+  });
 
   return (
-    <>
+    // ----header card is here for the homepage---
+    <ul>
       <Stack spacing={2}>
         <Skeleton variant="text" />
         <Card sx={{ minWidth: 375 }}>
@@ -45,95 +61,34 @@ function Homepage() {
               <article className="SingleUser">
                 <h2>
                   <NewspaperIcon sx={{ fontSize: 100 }}></NewspaperIcon>
-                  Just some of our regular posters!{" "}
+                  Welcome to nc-news!{" "}
                   <NewspaperIcon sx={{ fontSize: 100 }}></NewspaperIcon>
                 </h2>
+                <h3>Please use the navigation bar to move around</h3>
               </article>
             </Typography>
           </CardContent>
         </Card>
 
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author username and picture/avatar {user.username}</h4>
+        {/* -- individual UserCard which shows user info name, image-- */}
 
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
-
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author name and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
-
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author name and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
-
-        <Card sx={{ minWidth: 375 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <article className="SingleUser">
-                <h4>Author name and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="large">Expand</Button>
-          </CardActions>
-        </Card>
+        {users.map((user) => {
+          return isLoading ? (
+            <h1>Loading Please Wait.....</h1>
+          ) : (
+            <li key={user.username}>
+              <Button
+                style={{ minWidth: "660px" }}
+                variant="contained"
+                href={`/users/${user.username}`}
+              >
+                <h5>{user.username}</h5>
+              </Button>
+            </li>
+          );
+        })}
       </Stack>
-    </>
+    </ul>
   );
-}
+};
 export default Homepage;
