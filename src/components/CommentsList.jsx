@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import React from "react-router-dom";
 import CommentCard from "./CommentCard";
 import AddCommentBox from "./AddCommentBox";
+import * as dayjs from "dayjs";
 
 const CommentList = (props) => {
   const [comments, setComments] = useState([]);
@@ -63,8 +64,8 @@ const CommentList = (props) => {
               return (
                 <CommentCard
                   author={commentObj.author}
+                  created_at={dayjs(commentObj.created_at).format("DD/MM/YYYY")}
                   body={commentObj.body}
-                  created_at={commentObj.created_at}
                 ></CommentCard>
               );
             })}
