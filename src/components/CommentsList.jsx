@@ -64,6 +64,7 @@ const CommentList = (props) => {
                   author={commentObj.author}
                   created_at={dayjs(commentObj.created_at).format("DD/MM/YYYY")}
                   body={commentObj.body}
+                  votes={commentObj.votes}
                 ></CommentCard>
               );
             })}
