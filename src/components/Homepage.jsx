@@ -16,20 +16,19 @@ import UserCard from "./UserCard";
 import { CommentsDisabled, CommentSharp } from "@mui/icons-material";
 
 const Homepage = () => {
-  const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState();
   // const { username } = useParams();
-  console.log("line 21");
+  console.log("line 23");
 
-  console.log("line23", setUser);
+  console.log("line25", users);
 
   useEffect(() => {
     setIsLoading(true);
     getSingleUser(sortBy)
       .then((userData) => {
-        console.log("line 29", userData, user.username);
-        setUser(userData);
+        setUsers(userData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -37,8 +36,19 @@ const Homepage = () => {
       });
   }, [sortBy]);
 
+  useState(() => {
+    getSingleUser()
+      .then((userCriteriaFromApi) => {
+        setSortBy(userCriteriaFromApi);
+      })
+      .catch((error) => {
+        console.log(error);
+      }, []);
+  });
+
   return (
-    <>
+    // ----header card is here for the homepage---
+    <ul>
       <Stack spacing={2}>
         <Skeleton variant="text" />
         <Card sx={{ minWidth: 375 }}>
@@ -51,9 +61,10 @@ const Homepage = () => {
               <article className="SingleUser">
                 <h2>
                   <NewspaperIcon sx={{ fontSize: 100 }}></NewspaperIcon>
-                  Just some of our regular posters!{" "}
+                  Welcome to nc-news!{" "}
                   <NewspaperIcon sx={{ fontSize: 100 }}></NewspaperIcon>
                 </h2>
+                <h3>Please use the navigation bar to move around</h3>
               </article>
             </Typography>
           </CardContent>
@@ -61,33 +72,23 @@ const Homepage = () => {
 
         {/* -- individual UserCard which shows user info name, image-- */}
 
-        <ul>
-          <Card sx={{ minWidth: 375 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 18 }}
-                color="text.secondary"
-                gutterBottom
+        {users.map((user) => {
+          return isLoading ? (
+            <h1>Loading Please Wait.....</h1>
+          ) : (
+            <li key={user.username}>
+              <Button
+                style={{ minWidth: "660px" }}
+                variant="contained"
+                href={`/users/${user.username}`}
               >
-                {user.map((userObj) => {
-                  return <UserCard name={userObj.name}></UserCard>;
-                })}
-
-                {/* <article className="SingleUser">
-                <h4>Author username and picture/avatar {user.username}</h4>
-
-                <img src={user.avatar_url} alt="user avatar"></img>
-              </article>
-              <br /> */}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="large">Expand</Button>
-            </CardActions>
-          </Card>
-        </ul>
+                <h5>{user.username}</h5>
+              </Button>
+            </li>
+          );
+        })}
       </Stack>
-    </>
+    </ul>
   );
 };
 export default Homepage;
