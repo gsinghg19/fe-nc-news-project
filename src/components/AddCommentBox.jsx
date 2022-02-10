@@ -4,6 +4,7 @@ import { ButtonGroup } from "@mui/material";
 import { Card } from "@mui/material";
 
 const AddCommentBox = (props) => {
+  console.log("line7", props.id);
   return (
     <Card>
       <ButtonGroup>
@@ -11,10 +12,12 @@ const AddCommentBox = (props) => {
           comment_id={props.comment_id}
           getComments={props.comments}
           body={props.body}
-          author={props.author}
-          username={props.username}
+          //author={props.author}
+          username={"grumpy19"}
           created_at={props.created_at}
+          article_id={props.id}
         />
+
         <DeleteComment
           comment_id={props.comment_id}
           getComments={props.comments}
@@ -22,6 +25,7 @@ const AddCommentBox = (props) => {
           author={props.author}
           username={props.username}
           created_at={props.created_at}
+          article_id={props.id}
         />
       </ButtonGroup>
     </Card>

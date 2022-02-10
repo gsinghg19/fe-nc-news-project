@@ -1,0 +1,52 @@
+import React, { Component } from "react";
+import { Button } from "@mui/material";
+import * as api from "../utils/api";
+import { setComments } from "./CommentsList";
+import { useState } from "react";
+import axios from "axios";
+
+const postNewComment = (newComment, article_id) => {
+  axios({
+    method: "post",
+    url: `https://nc-news-gsinghg19.herokuapp.com/api/articles/${article_id}/comments`,
+    data: {
+      body: newComment,
+    },
+  });
+};
+
+const AddComment = ({ article_id, setComments }) => {
+  const [newComment, setNewComment] = useState();
+
+  return (
+    <form
+      onSubmit={async (e) => {
+        setComments((currentComments) => {
+          const newComm = {
+            Article_id: article_id,
+            body: newComment,
+            votes: 0,
+            created_at: Date(Date.now()),
+          };
+          return [newComm, ...currentComments];
+        });
+        postNewComment(newComment, article_id);
+        e.preventDefault();
+      }}
+    >
+      <input
+        id="AddCommentBox"
+        type="text"
+        rows="10"
+        onChange={(e) => {
+          setNewComment(e.target.value);
+        }}
+        required={true}
+      />
+      <button onClick={(e) => AddComment()}>Post</button>
+    </form>
+  );
+};
+console.log();
+
+export default AddComment;

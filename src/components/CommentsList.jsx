@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import React from "react-router-dom";
 import CommentCard from "./CommentCard";
 import AddCommentBox from "./AddCommentBox";
+import AddComment from "./AddComment";
 import * as dayjs from "dayjs";
 
 const CommentList = (props) => {
@@ -38,7 +39,7 @@ const CommentList = (props) => {
     <h1>Loading....</h1>
   ) : (
     <ul>
-      <AddCommentBox />
+      <AddCommentBox id={props.id} />
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <CommentCard>
