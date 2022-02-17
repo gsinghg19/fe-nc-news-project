@@ -1,17 +1,16 @@
-import * as api from "../utils/api";
-import { Button } from "@mui/material";
+import * as api from '../utils/api';
+import { Button } from '@mui/material';
 
-const DeleteComment = ({ comment_id, getComments, author, username }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (author === username) {
-      api.deleteComment(comment_id).then(() => {
-        getComments();
-      });
+const DeleteComment = (props) => {
+  const deleteClick = () => {
+    // console.log(props.id);
+    if (props.author === props.username) {
+      api.deleteComment(props.id).then(() => {});
     }
   };
+
   return (
-    <Button className="DeleteButton" onClick={handleSubmit} variant="outlined">
+    <Button className="DeleteButton" onClick={deleteClick} variant="outlined">
       Delete comment!
     </Button>
   );

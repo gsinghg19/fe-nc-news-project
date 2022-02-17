@@ -1,3 +1,4 @@
+import DeleteComment from './DeleteComment';
 const CommentCard = (props) => {
   return (
     <div className="CommentCard">
@@ -7,6 +8,7 @@ const CommentCard = (props) => {
         <h4>{props.votes}</h4>
         <p>{props.body}</p>
       </div>
+      <DeleteComment id={props.id} />
     </div>
   );
 };

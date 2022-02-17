@@ -12,7 +12,7 @@ const ArticleList = () => {
     setIsLoading(true);
     getAllArticles(sortBy)
       .then((articlesFromApi) => {
-        console.log(articlesFromApi);
+        console.log("line 15", articlesFromApi);
         setArticles(articlesFromApi);
         setIsLoading(false);
       })
