@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { getAllTopics } from "../utils/api";
-import { Button } from "@mui/material";
+import { useEffect, useState } from 'react';
+import { getAllTopics } from '../utils/api';
+import { Button, Select } from '@mui/material';
 
-const TopicList = () => {
+const TopicList = ({ topicsFromApi }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,12 +24,12 @@ const TopicList = () => {
     <h1>Loading please wait.....</h1>
   ) : (
     <ul>
-      {" "}
+      {' '}
       {topics.map((topic) => {
         return (
           <li key={topic.slug}>
             <Button
-              style={{ minWidth: "200px" }}
+              style={{ minWidth: '200px' }}
               variant="contained"
               href={`/topics/${topic.slug}`}
             >

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Button, Input, InputLabel, FormControl } from "@mui/material";
+import React, { Component } from 'react';
+import { Button, Input, InputLabel, FormControl } from '@mui/material';
 
-import * as api from "../utils/api";
+import * as api from '../utils/api';
 
 class AddComment extends Component {
   state = {
     username: this.props.username,
-    body: "",
+    body: '',
   };
 
   handleChange = ({ target }) => {
@@ -16,14 +16,14 @@ class AddComment extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    if (this.state.body.replace(/\s/g, "").length !== 0) {
+    if (this.state.body.replace(/\s/g, '').length !== 0) {
       api
         .postNewComment(this.props.article_id, {
           username: this.props.username,
           body: this.state.body,
         })
         .then(() => {
-          this.setState({ username: this.props.username, body: "" });
+          this.setState({ username: this.props.username, body: '' });
           // api.getComments();
         });
     }
@@ -34,8 +34,10 @@ class AddComment extends Component {
     return (
       <div>
         <form>
-          <FormControl sx={{ m: 0, width: 200 }}>
-            <InputLabel id="type_here-label">type here</InputLabel>
+          <FormControl sx={{ m: 1, width: 195 }}>
+            <InputLabel id="type_here-label" size="small">
+              type here
+            </InputLabel>
             <label className="CommentLabel">
               <Input
                 className="AddCommentBox"

@@ -1,24 +1,25 @@
-import DeleteComment from "./DeleteComment";
-import AddComment from "./AddComment";
-import { ButtonGroup } from "@mui/material";
-import { Card } from "@mui/material";
+import DeleteComment from './DeleteComment';
+import AddComment from './AddComment';
+import { ButtonGroup } from '@mui/material';
+import { Card } from '@mui/material';
 
 const AddCommentBox = (props) => {
-  console.log("line7", props.id);
+  console.log('line7', props.id);
+
   return (
-    <Card>
+    <Card style={{ padding: 10 }}>
       <ButtonGroup>
         <AddComment
           comment_id={props.comment_id}
           getComments={props.comments}
           body={props.body}
           //author={props.author}
-          username={"grumpy19"}
+          username={'grumpy19'}
           created_at={props.created_at}
           article_id={props.id}
         />
 
-        <DeleteComment
+        {/* <DeleteComment
           comment_id={props.comment_id}
           getComments={props.comments}
           body={props.body}
@@ -26,7 +27,7 @@ const AddCommentBox = (props) => {
           username={props.username}
           created_at={props.created_at}
           article_id={props.id}
-        />
+        /> */}
       </ButtonGroup>
     </Card>
   );
