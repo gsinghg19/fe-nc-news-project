@@ -7,8 +7,6 @@ import Typography from '@mui/material/Typography';
 import React from 'react-router-dom';
 import CommentCard from './CommentCard';
 import AddCommentBox from './AddCommentBox';
-import AddComment from './AddComment';
-import DeleteComment from './DeleteComment';
 import * as dayjs from 'dayjs';
 import { padding } from '@mui/system';
 
@@ -44,19 +42,10 @@ const CommentList = (props) => {
       <ul>
         <AddCommentBox id={props.id} />
         <Card sx={{ minWidth: 275 }}>
-          <CardContent>
-            <CommentCard>
-              <Typography
-                sx={{ fontSize: 18 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {' '}
-                <article className="comments"></article>
-                <br />
-              </Typography>
-            </CommentCard>
-          </CardContent>
+          <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+            <article className="comments"></article>
+            <br />
+          </Typography>
         </Card>
       </ul>
 
