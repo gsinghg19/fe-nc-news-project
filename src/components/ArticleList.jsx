@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { getAllArticles } from "../utils/api";
-import { Button } from "@mui/material";
-import Sorter from "./Sorter";
+import { useEffect, useState } from 'react';
+import { getAllArticles } from '../utils/api';
+import { Button } from '@mui/material';
+import Sorter from './Sorter';
+import Loading from './Loading';
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
@@ -12,7 +13,7 @@ const ArticleList = () => {
     setIsLoading(true);
     getAllArticles(sortBy)
       .then((articlesFromApi) => {
-        console.log("line 15", articlesFromApi);
+        console.log('line 15', articlesFromApi);
         setArticles(articlesFromApi);
         setIsLoading(false);
       })
@@ -32,23 +33,23 @@ const ArticleList = () => {
   });
 
   return isLoading ? (
-    <h1>Loading please wait.....</h1>
+    // <h1>Loading please wait.....</h1>
+    <Loading />
   ) : (
     <ul>
-      {" "}
+      <Sorter />{' '}
       {articles.map((article) => {
         return (
-          <li key={article.article_id}>
+          <ul key={article.article_id}>
             <Button
-              style={{
-                minWidth: "660px",
-              }}
+              // sx={{ mr: 70 }}
+              style={{ minWidth: '690px' }}
               variant="contained"
               href={`/articles/${article.article_id}/`}
             >
               <h5>{article.title}</h5>
             </Button>
-          </li>
+          </ul>
         );
       })}
     </ul>

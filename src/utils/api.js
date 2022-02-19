@@ -66,11 +66,11 @@
 //     });
 // };
 
-const axios = require("axios");
+const axios = require('axios');
 
 exports.getAllArticles = (articles) => {
   return axios
-    .get("https://nc-news-gsinghg19.herokuapp.com/api/articles")
+    .get('https://nc-news-gsinghg19.herokuapp.com/api/articles')
     .then(({ data: { allArticles } }) => {
       return allArticles;
     });
@@ -86,7 +86,7 @@ exports.getSingleArticle = (article_id) => {
 
 exports.getAllTopics = () => {
   return axios
-    .get("https://nc-news-gsinghg19.herokuapp.com/api/topics")
+    .get('https://nc-news-gsinghg19.herokuapp.com/api/topics')
     .then(({ data: { topics } }) => {
       return topics;
     });
@@ -94,7 +94,9 @@ exports.getAllTopics = () => {
 
 exports.getArticlesViaSingleTopic = (slug) => {
   return axios
-    .get(`https://nc-news-gsinghg19.herokuapp.com/topics/${slug}`)
+    .get(
+      `https://nc-news-gsinghg19.herokuapp.com/api/articles?sort_by=topic&topic=${slug}`
+    )
     .then(({ data: { slug } }) => {
       return slug;
     });

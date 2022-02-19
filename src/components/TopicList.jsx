@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllTopics } from '../utils/api';
-import { Button, Select } from '@mui/material';
+import { Button } from '@mui/material';
+import Loading from './Loading';
 
 const TopicList = ({ topicsFromApi }) => {
   const [topics, setTopics] = useState([]);
@@ -17,25 +18,25 @@ const TopicList = ({ topicsFromApi }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-  console.log(topics);
+  }, [topicsFromApi]);
 
   return isLoading ? (
-    <h1>Loading please wait.....</h1>
+    // <h1>Loading please wait.....</h1>
+    <Loading />
   ) : (
     <ul>
-      {' '}
+      <h2>Topic List</h2>{' '}
       {topics.map((topic) => {
         return (
-          <li key={topic.slug}>
+          <ul key={topic.slug} className="topic-card">
             <Button
               style={{ minWidth: '200px' }}
               variant="contained"
-              href={`/topics/${topic.slug}`}
+              href={`articles?sort_by=topic&topic=${topic.slug}`}
             >
               <h5>{topic.slug}</h5>
             </Button>
-          </li>
+          </ul>
         );
       })}
     </ul>
@@ -43,3 +44,17 @@ const TopicList = ({ topicsFromApi }) => {
 };
 
 export default TopicList;
+
+// return (
+//   <li key={`${topic.slug}`} className="topic-card">
+//     <h2 className="topics-title">{topic.slug}</h2>
+//     <p>{topic.description}</p>
+//     <Button
+//       variant="contained"
+//       className="link to topic articles"
+//       href={`/topics/${topic.slug}`}
+//     >
+//       View Articles
+//     </Button>
+//   </li>
+// );
