@@ -1,17 +1,17 @@
-import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import MuiAlert from "@mui/material/Alert";
-import { Input, Button, FormGroup } from "@mui/material";
-import { useState } from "react";
+import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import MuiAlert from '@mui/material/Alert';
+import { Input, Button, FormGroup } from '@mui/material';
+import { useState } from 'react';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,12 +28,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const usernames = [
-  "tickle122",
-  "grumpy19",
-  "happyamy2016",
-  "cooljmessy",
-  "weegembump",
-  "jessjelly",
+  'tickle122',
+  'grumpy19',
+  'happyamy2016',
+  'cooljmessy',
+  'weegembump',
+  'jessjelly',
 ];
 
 function getStyles(username, personName, theme) {
@@ -62,12 +62,12 @@ export default function UserLogin() {
     } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof value === 'string' ? value.split(',') : value
     );
   };
 
   const handleClose = (event, reason) => {
-    if (reason === "clickable") {
+    if (reason === 'clickable') {
       return;
     }
 
@@ -75,7 +75,7 @@ export default function UserLogin() {
   };
 
   const submitAction = () => {
-    console.log("successful login");
+    console.log('successful login');
     setOpen(true);
   };
 
@@ -96,7 +96,7 @@ export default function UserLogin() {
   return (
     <FormGroup>
       <div>
-        {" "}
+        {' '}
         <h2>
           <p className="UserLogin">Login</p>
         </h2>
@@ -125,7 +125,7 @@ export default function UserLogin() {
           <FormControl sx={{ m: 5, width: 300 }}>
             <InputLabel id="Password-label">Password</InputLabel>
             <Input
-              type={passwordShown ? "text" : "password"}
+              type={passwordShown ? 'text' : 'password'}
               onChange={(event) => setPassword(event.target.value)}
             />
             <Button onClick={togglePassword}>Show/Hide Password</Button>
@@ -134,7 +134,7 @@ export default function UserLogin() {
         <div>
           <Button onClick={submitAction} type="Submit" variant="contained">
             Submit
-          </Button>{" "}
+          </Button>{' '}
           <Snackbar
             open={open}
             autoHideDuration={4000}
@@ -145,7 +145,7 @@ export default function UserLogin() {
             <Alert
               onClose={handleClose}
               severity="success"
-              sx={{ width: "100%" }}
+              sx={{ width: '100%' }}
             >
               Successful user login!
             </Alert>

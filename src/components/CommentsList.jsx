@@ -26,7 +26,6 @@ const CommentList = (props) => {
     setIsLoading(true);
     fetchArticleCommentsByArticleId(props.id)
       .then((articleData) => {
-        //console.log(articleData);
         setComments(articleData);
         setIsLoading(false);
       })

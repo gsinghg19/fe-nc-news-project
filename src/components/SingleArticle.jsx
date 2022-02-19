@@ -1,29 +1,28 @@
-import { useState, useEffect } from "react";
-import { getSingleArticle } from "../utils/api";
-import { useParams } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import React from "react-router-dom";
-import CommentList from "./CommentsList";
-import VotingCard from "./VotingCard";
-import * as dayjs from "dayjs";
-import { CenterFocusStrong } from "@mui/icons-material";
+import { useState, useEffect } from 'react';
+import { getSingleArticle } from '../utils/api';
+import { useParams } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import React from 'react-router-dom';
+import CommentList from './CommentsList';
+import VotingCard from './VotingCard';
+import * as dayjs from 'dayjs';
 
 const SingleArticle = () => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  //const [articleId, setArticleId] = useState("");
 
   const { article_id } = useParams();
+  console.log(article);
 
   const bull = (
     <Box
       component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
     ></Box>
   );
 
@@ -50,9 +49,9 @@ const SingleArticle = () => {
             <article className="SingleArticle">
               <h4>Written by {article.author}</h4>
               <h2>{article.title}</h2>
-              <p style={{ textAlign: "left" }}>{article.body}</p>
+              <p style={{ textAlign: 'left' }}>{article.body}</p>
               <p>
-                created on: {dayjs(article.created_at).format("DD/MM/YYYY")}{" "}
+                created on: {dayjs(article.created_at).format('DD/MM/YYYY')}{' '}
               </p>
             </article>
             <br />

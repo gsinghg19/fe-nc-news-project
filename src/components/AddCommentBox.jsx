@@ -4,8 +4,6 @@ import { ButtonGroup } from '@mui/material';
 import { Card } from '@mui/material';
 
 const AddCommentBox = (props) => {
-  console.log('line7', props.id);
-
   return (
     <Card style={{ padding: 10 }}>
       <ButtonGroup>
