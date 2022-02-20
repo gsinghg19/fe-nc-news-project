@@ -13,8 +13,6 @@ import { styled } from '@mui/material/styles';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSingleUser } from '../utils/api';
-// import UserCard from './UserCard';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,37 +26,11 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function Homepage() {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState();
-  const { username } = useParams();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-    getSingleUser(sortBy)
-      .then((userData) => {
-        setUsers(userData);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [sortBy]);
-
-  useState(() => {
-    getSingleUser()
-      .then((userCriteriaFromApi) => {
-        setSortBy(userCriteriaFromApi);
-      })
-      .catch((error) => {
-        console.log(error);
-      }, []);
-  });
 
   return (
     // ----header card is here for the homepage---
@@ -93,50 +65,29 @@ export default function Homepage() {
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>
-                    Heat 1/2 cup of the broth in a pot until simmering, add
-                    saffron and set aside for 10 minutes.
+                    Hello and welcome to my frontend project using my
+                    Northcoders backend api project to show you Northcoders news
+                    articles.
                   </Typography>
                   <Typography paragraph>
-                    Heat oil in a (14- to 16-inch) paella pan or a large, deep
-                    skillet over medium-high heat. Add chicken, shrimp and
-                    chorizo, and cook, stirring occasionally until lightly
-                    browned, 6 to 8 minutes. Transfer shrimp to a large plate
-                    and set aside, leaving chicken and chorizo in the pan. Add
-                    pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                    pepper, and cook, stirring often until thickened and
-                    fragrant, about 10 minutes. Add saffron broth and remaining
-                    4 1/2 cups chicken broth; bring to a boil.
+                    Northcoders News is a social news aggregation, web content
+                    rating, and discussion website. Northcoders News has
+                    articles which are divided into topics. Each article has
+                    user curated ratings and can be up or down voted using the
+                    API. Users can also add comments about an article.
                   </Typography>
                   <Typography paragraph>
-                    Add rice and stir very gently to distribute. Top with
-                    artichokes and peppers, and cook without stirring, until
-                    most of the liquid is absorbed, 15 to 18 minutes. Reduce
-                    heat to medium-low, add reserved shrimp and mussels, tucking
-                    them down into the rice, and cook again without stirring,
-                    until mussels have opened and rice is just tender, 5 to 7
-                    minutes more. (Discard any mussels that don’t open.)
+                    I have Pulled together all the front-end skills,
+                    technologies and best practices I have learnt. Making
+                    asynchronous API calls to my own server. Using HTTP request
+                    types to interact with my backend, and HTTP response codes
+                    to update my UI accordingly.
                   </Typography>
                 </CardContent>
               </Collapse>
             </Typography>
           </CardContent>
         </Card>
-        {/* -- individual UserCard which shows user info name, image-- */}
-        {/* {users.map((user) => {
-          return isLoading ? (
-            <h1>Loading Please Wait.....</h1>
-          ) : (
-            <li key={user.username}>
-              <Button
-                style={{ minWidth: '660px' }}
-                variant="contained"
-                href={`/users/${user.username}`}
-              >
-                <h5>{user.username}</h5>
-              </Button>
-            </li>
-          ); */}
-        {/* })} */}
       </Stack>
     </ul>
   );

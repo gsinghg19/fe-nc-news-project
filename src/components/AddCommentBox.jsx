@@ -16,16 +16,6 @@ const AddCommentBox = (props) => {
           created_at={props.created_at}
           article_id={props.id}
         />
-
-        {/* <DeleteComment
-          comment_id={props.comment_id}
-          getComments={props.comments}
-          body={props.body}
-          author={props.author}
-          username={props.username}
-          created_at={props.created_at}
-          article_id={props.id}
-        /> */}
       </ButtonGroup>
     </Card>
   );

@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import HomeIcon from "@mui/icons-material/Home";
+import { Button } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Nav = () => {
   return (
