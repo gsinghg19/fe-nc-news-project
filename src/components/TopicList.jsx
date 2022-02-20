@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllTopics, getArticlesViaSingleTopic } from '../utils/api';
 import { Button } from '@mui/material';
 import Loading from './Loading';
-import { useNavigate } from 'react-router-dom';
-import SingleArticle from './SingleArticle';
+import Nav from './Nav';
 
 const TopicList = ({ topicsFromApi }) => {
   const [topics, setTopics] = useState([]);
@@ -73,17 +72,3 @@ const TopicList = ({ topicsFromApi }) => {
 };
 
 export default TopicList;
-
-// return (
-//   <li key={`${topic.slug}`} className="topic-card">
-//     <h2 className="topics-title">{topic.slug}</h2>
-//     <p>{topic.description}</p>
-//     <Button
-//       variant="contained"
-//       className="link to topic articles"
-//       href={`/topics/${topic.slug}`}
-//     >
-//       View Articles
-//     </Button>
-//   </li>
-// );

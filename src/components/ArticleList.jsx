@@ -36,7 +36,7 @@ const ArticleList = () => {
     // <h1>Loading please wait.....</h1>
     <Loading />
   ) : (
-    <ul>
+    <div>
       <Sorter />{' '}
       {articles.map((article) => {
         return (
@@ -52,7 +52,7 @@ const ArticleList = () => {
           </ul>
         );
       })}
-    </ul>
+    </div>
   );
 };
 
