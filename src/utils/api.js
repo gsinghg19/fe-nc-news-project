@@ -86,7 +86,7 @@ exports.getSingleArticle = (article_id) => {
 
 exports.getAllTopics = () => {
   return axios
-    .get('https://nc-news-gsinghg19.herokuapp.com/api/topics')
+    .get(`https://nc-news-gsinghg19.herokuapp.com/api/topics`)
     .then(({ data: { topics } }) => {
       return topics;
     });
@@ -97,8 +97,8 @@ exports.getArticlesViaSingleTopic = (slug) => {
     .get(
       `https://nc-news-gsinghg19.herokuapp.com/api/articles?sort_by=topic&topic=${slug}`
     )
-    .then(({ data: { slug } }) => {
-      return slug;
+    .then((data) => {
+      return data.data.allArticles;
     });
 };
 

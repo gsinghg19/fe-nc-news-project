@@ -13,7 +13,7 @@ const ArticlesByTopic = () => {
   const [specificTopic, setSpecificTopic] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { slug } = useParams();
-  console.log(slug);
+  // console.log(topic);
 
   useEffect(() => {
     setIsLoading(true);

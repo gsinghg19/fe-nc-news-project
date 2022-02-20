@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { getAllTopics } from '../utils/api';
+import { getAllTopics, getArticlesViaSingleTopic } from '../utils/api';
 import { Button } from '@mui/material';
 import Loading from './Loading';
+import { useNavigate } from 'react-router-dom';
+import SingleArticle from './SingleArticle';
 
 const TopicList = ({ topicsFromApi }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,26 +23,52 @@ const TopicList = ({ topicsFromApi }) => {
       });
   }, [topicsFromApi]);
 
+  const getTopicArticles = (topic) => {
+    console.log('line27', topic);
+    getArticlesViaSingleTopic(topic).then((articles) => {
+      console.log(articles);
+      setArticles(articles);
+    });
+  };
+
   return isLoading ? (
     // <h1>Loading please wait.....</h1>
     <Loading />
   ) : (
-    <ul>
-      <h2>Topic List</h2>{' '}
-      {topics.map((topic) => {
-        return (
-          <ul key={topic.slug} className="topic-card">
+    <>
+      <div>
+        <h2>Topic List</h2>{' '}
+        {topics.map((topic) => {
+          return (
             <Button
               style={{ minWidth: '200px' }}
               variant="contained"
-              href={`articles?sort_by=topic&topic=${topic.slug}`}
+              onClick={() => {
+                getTopicArticles(topic.slug);
+              }}
             >
               <h5>{topic.slug}</h5>
             </Button>
-          </ul>
-        );
-      })}
-    </ul>
+          );
+        })}
+      </div>
+      <div>
+        {articles.map((article) => {
+          return (
+            <ul key={article.article_id}>
+              <Button
+                // sx={{ mr: 70 }}
+                style={{ minWidth: '690px' }}
+                variant="contained"
+                href={`/articles/${article.article_id}/`}
+              >
+                <h5>{article.title}</h5>
+              </Button>
+            </ul>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
