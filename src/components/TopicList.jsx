@@ -13,7 +13,6 @@ const TopicList = ({ topicsFromApi }) => {
     setIsLoading(true);
     getAllTopics()
       .then((topicsFromApi) => {
-        console.log(topicsFromApi);
         setTopics(topicsFromApi);
         setIsLoading(false);
       })
@@ -23,9 +22,7 @@ const TopicList = ({ topicsFromApi }) => {
   }, [topicsFromApi]);
 
   const getTopicArticles = (topic) => {
-    console.log('line27', topic);
     getArticlesViaSingleTopic(topic).then((articles) => {
-      console.log(articles);
       setArticles(articles);
     });
   };

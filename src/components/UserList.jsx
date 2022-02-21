@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { getAllUsers } from "../utils/api";
-import UserCard from "./userCard";
+import { useState, useEffect } from 'react';
+import { getAllUsers } from '../utils/api';
+import UserCard from './userCard';
 
 const UserList = () => {
   const [users, setUsers] = useState();
@@ -8,7 +8,6 @@ const UserList = () => {
   useEffect(() => {
     getAllUsers()
       .then((usersData) => {
-        console.log(usersData);
         setUsers(usersData);
       })
       .catch((error) => {

@@ -119,7 +119,6 @@ exports.fetchArticleCommentsByArticleId = (article_id) => {
       `https://nc-news-gsinghg19.herokuapp.com/api/articles/${article_id}/comments`
     )
     .then((res) => {
-      console.log(res.data.commentsByArticleId);
       return res.data.commentsByArticleId;
     });
 };
@@ -146,7 +145,6 @@ exports.getSingleUser = (username) => {
   return axios
     .get(`https://nc-news-gsinghg19.herokuapp.com/api/users/${username}`)
     .then((res) => {
-      console.log(res.data.username);
       return res.data;
     });
 };

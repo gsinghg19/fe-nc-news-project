@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 
 const DeleteComment = (props) => {
   const deleteClick = () => {
-    // console.log(props.id);
     if (props.author === props.username) {
       api.deleteComment(props.id).then(() => {});
     }
